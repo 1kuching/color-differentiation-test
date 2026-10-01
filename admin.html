@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Color Test Data</title>
+
+<style>
+
+body {
+    margin: 0;
+    background-color: #dff7f4;
+    font-family: Arial, sans-serif;
+    color: #111111;
+}
+
+.page {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 22px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(0,80,75,0.12);
+}
+
+h1, h2 {
+    color: #111111;
+}
+
+p {
+    color: #555555;
+}
+
+input {
+    padding: 12px;
+    width: 70%;
+    border: 1px solid #b9e6e1;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+button {
+    background-color: #168f88;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #11756f;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th {
+    background-color: #e7f8f5;
+    color: #168f88;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #e5eeee;
+    text-align: left;
+    font-size: 13px;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+<div class="card">
+
+<h1>
+Color Test Data Dashboard
+</h1>
+
+<p>
+This page is for the researcher only.
+</p>
+
+<p>
+Enter the Google Apps Script URL below
+to view the collected experiment data.
+</p>
+
+<input
+    id="scriptURL"
+    type="text"
+    placeholder="Paste Google Apps Script URL here"
+>
+
+<button onclick="loadData()">
+Load Data
+</button>
+
+</div>
+
+
+<div
+    class="card hidden"
+    id="dataSection"
+>
+
+<h2>
+Participant Data
+</h2>
+
+<p id="summary"></p>
+
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Timestamp</th>
+
+<th>Name</th>
+
+<th>Class</th>
+
+<th>Question</th>
+
+<th>RGB Distance</th>
+
+<th>Correct</th>
+
+<th>Response Time</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="dataTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+
+async function loadData() {
+
+    let url =
+        document.getElementById(
+            "scriptURL"
+        ).value.trim();
+
+
+    if (url === "") {
+
+        alert(
+            "Please enter the Google Apps Script URL."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        let response =
+            await fetch(url);
+
+
+        let data =
+            await response.json();
+
+
+        document
+            .getElementById(
+                "dataSection"
+            )
+            .classList.remove(
+                "hidden"
+            );
+
+
+        let table =
+            document.getElementById(
+                "dataTable"
+            );
+
+
+        table.innerHTML = "";
+
+
+        /*
+        Create a row for
+        every participant response
+        */
+
+
+        data.forEach(
+            function(row) {
+
+                let tr =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                tr.innerHTML = `
+
+                    <td>
+                        ${row.timestamp}
+                    </td>
+
+                    <td>
+                        ${row.name}
+                    </td>
+
+                    <td>
+                        ${row.className}
+                    </td>
+
+                    <td>
+                        ${row.question}
+                    </td>
+
+                    <td>
+                        ${row.distance}
+                    </td>
+
+                    <td>
+                        ${row.correct}
+                    </td>
+
+                    <td>
+                        ${row.responseTime}
+                    </td>
+
+                `;
+
+
+                table.appendChild(tr);
+
+            }
+        );
+
+
+        document.getElementById(
+            "summary"
+        ).innerText =
+            data.length +
+            " responses loaded.";
+
+
+    }
+
+    catch (error) {
+
+        alert(
+            "Could not load the data. Make sure your Google Apps Script URL is correct."
+        );
+
+        console.log(error);
+
+    }
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
