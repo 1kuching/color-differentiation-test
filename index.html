@@ -2,582 +2,680 @@
 <html>
 <head>
 
-    <title>Color Differentiation Test</title>
+<title>Color Differentiation Test</title>
 
-    <style>
+<style>
 
-        /* ---------- GENERAL PAGE ---------- */
+body {
+    margin: 0;
+    background-color: #dff7f4;
+    font-family: Arial, sans-serif;
+    color: #111111;
+}
 
-        body {
-            margin: 0;
-            background-color: #d9f3f0;
-            font-family: Arial, sans-serif;
-            color: #333333;
-        }
+.page {
+    max-width: 900px;
+    margin: auto;
+    padding: 50px 20px;
+    text-align: center;
+}
 
-        .page {
-            max-width: 900px;
-            margin: auto;
-            padding: 50px 20px;
-            text-align: center;
-        }
+h1, h2 {
+    color: #111111;
+}
 
+.card {
+    background-color: white;
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 35px;
+    border-radius: 22px;
+    box-shadow: 0 8px 25px rgba(0,80,75,0.12);
+}
 
-        /* ---------- HEADINGS ---------- */
+input {
+    width: 90%;
+    padding: 12px;
+    margin: 8px;
+    border: 1px solid #b9e6e1;
+    border-radius: 10px;
+    font-size: 16px;
+}
 
-        h1 {
-            color: #111111;
-            font-size: 38px;
-            margin-bottom: 10px;
-        }
+.start-button {
+    background-color: #168f88;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+}
 
-        h2 {
-            color: #111111;
-            font-size: 25px;
-            margin-bottom: 8px;
-        }
+.color-container {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin: 30px 0;
+}
 
-        p {
-            color: #555555;
-            font-size: 16px;
-            line-height: 1.5;
-        }
+.color-button {
+    width: 150px;
+    height: 150px;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+}
 
+.color-button:hover {
+    transform: scale(1.04);
+}
 
-        /* ---------- START SCREEN ---------- */
+.progress {
+    color: #168f88;
+    font-weight: bold;
+}
 
-        .intro {
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-        }
+.timer {
+    color: #168f88;
+    font-weight: bold;
+}
 
-        .start-button {
-            background-color: #168f88;
-            color: white;
-            border: none;
-            padding: 14px 30px;
-            border-radius: 12px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+.hidden {
+    display: none;
+}
 
-        .start-button:hover {
-            background-color: #11756f;
-        }
+.result-number {
+    color: #168f88;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 10px;
+}
 
-
-        /* ---------- TEST BOX ---------- */
-
-        .test-box {
-            background-color: white;
-            max-width: 700px;
-            margin: 30px auto;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0, 80, 75, 0.12);
-        }
-
-
-        /* ---------- PROGRESS ---------- */
-
-        .progress {
-            color: #168f88;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-
-        /* ---------- COLOR BOXES ---------- */
-
-        .color-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .color-button {
-            width: 150px;
-            height: 150px;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: transform 0.15s;
-        }
-
-        .color-button:hover {
-            transform: scale(1.04);
-        }
-
-
-        /* ---------- TIMER ---------- */
-
-        .timer {
-            margin-top: 25px;
-            color: #168f88;
-            font-weight: bold;
-        }
-
-
-        /* ---------- RESULTS ---------- */
-
-        .results {
-            background-color: white;
-            max-width: 600px;
-            margin: 30px auto;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0, 80, 75, 0.12);
-        }
-
-        .result-number {
-            font-size: 28px;
-            color: #168f88;
-            font-weight: bold;
-        }
-
-
-        /* ---------- HIDDEN ---------- */
-
-        .hidden {
-            display: none;
-        }
-
-
-        /* ---------- MOBILE ---------- */
-
-        @media (max-width: 600px) {
-
-            .color-container {
-                gap: 8px;
-            }
-
-            .color-button {
-                width: 100px;
-                height: 100px;
-            }
-
-            .test-box {
-                padding: 20px;
-            }
-
-        }
-
-    </style>
+</style>
 
 </head>
-
 
 <body>
 
 <div class="page">
 
 
-    <!-- START SCREEN -->
+<!-- START PAGE -->
 
-    <div id="startScreen">
+<div id="startScreen">
 
-        <h1>Color Differentiation Test</h1>
+<h1>Color Differentiation Test</h1>
 
-        <p class="intro">
-            You will be shown three colors. Two colors will be the same,
-            while one will be slightly different. Select the different color
-            as quickly and accurately as possible.
-        </p>
+<p>
+Find the one color that is different from the other two.
+The colors become progressively harder to distinguish.
+</p>
 
-        <button class="start-button" onclick="startTest()">
-            Start Test
-        </button>
+<div class="card">
 
-    </div>
+<h2>Participant Information</h2>
 
+<input
+    id="participantName"
+    type="text"
+    placeholder="Enter your name"
+>
 
+<br>
 
-    <!-- TEST SCREEN -->
+<input
+    id="participantClass"
+    type="text"
+    placeholder="Enter your class"
+>
 
-    <div id="testScreen" class="hidden">
+<br><br>
 
-        <div class="test-box">
+<button
+    class="start-button"
+    onclick="startTest()"
+>
+Start Test
+</button>
 
-            <div class="progress" id="progress">
-                Round 1 of 15
-            </div>
+</div>
 
-            <h2>Which color is different?</h2>
-
-            <p>
-                Select one of the three colors.
-            </p>
-
-
-            <div class="color-container">
-
-                <button
-                    class="color-button"
-                    id="color1"
-                    onclick="chooseColor(0)">
-                </button>
-
-                <button
-                    class="color-button"
-                    id="color2"
-                    onclick="chooseColor(1)">
-                </button>
-
-                <button
-                    class="color-button"
-                    id="color3"
-                    onclick="chooseColor(2)">
-                </button>
-
-            </div>
+</div>
 
 
-            <div class="timer">
+<!-- TEST PAGE -->
 
-                Time:
-                <span id="timer">0.00</span>
-                seconds
+<div id="testScreen" class="hidden">
 
-            </div>
+<div class="card">
 
-        </div>
+<div
+    class="progress"
+    id="progress"
+>
+Question 1 of 20
+</div>
 
-    </div>
+<h2>
+Which color is different?
+</h2>
+
+<p>
+Select the color that is slightly different.
+</p>
+
+<div class="color-container">
+
+<button
+    class="color-button"
+    id="color1"
+    onclick="chooseColor(0)"
+></button>
+
+<button
+    class="color-button"
+    id="color2"
+    onclick="chooseColor(1)"
+></button>
+
+<button
+    class="color-button"
+    id="color3"
+    onclick="chooseColor(2)"
+></button>
+
+</div>
+
+<div class="timer">
+Time:
+<span id="timer">0.00</span>
+seconds
+</div>
+
+</div>
+
+</div>
 
 
+<!-- RESULTS -->
 
-    <!-- RESULTS SCREEN -->
+<div id="resultsScreen" class="hidden">
 
-    <div id="resultsScreen" class="hidden">
+<div class="card">
 
-        <div class="results">
+<h1>
+Test Complete!
+</h1>
 
-            <h1>Test Complete!</h1>
+<p>
+Thank you for participating.
+</p>
 
-            <p>
-                Here are your results:
-            </p>
+<p>
+Accuracy
+</p>
 
-            <p>
-                Accuracy
-            </p>
+<div
+    class="result-number"
+    id="accuracy"
+>
+0%
+</div>
 
-            <div
-                class="result-number"
-                id="accuracy">
-                0%
-            </div>
+<p>
+Average Response Time
+</p>
 
+<div
+    class="result-number"
+    id="averageTime"
+>
+0.00 seconds
+</div>
 
-            <p>
-                Average response time
-            </p>
+<p>
+Correct Answers
+</p>
 
-            <div
-                class="result-number"
-                id="averageTime">
-                0.00 seconds
-            </div>
+<div
+    class="result-number"
+    id="correctAnswers"
+>
+0 / 20
+</div>
 
+</div>
 
-            <p>
-                Correct answers
-            </p>
-
-            <div
-                class="result-number"
-                id="correctAnswers">
-                0 / 15
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
 
 </div>
 
 
-
 <script>
 
-    /* ===================================
-       EXPERIMENT VARIABLES
-    =================================== */
 
-    let currentRound = 0;
+/* -------------------------
+   VARIABLES
+------------------------- */
 
-    const totalRounds = 15;
+let question = 0;
 
-    let correctAnswers = 0;
+let totalQuestions = 20;
 
-    let responseTimes = [];
+let correct = 0;
 
-    let startTime;
+let responseTimes = [];
 
-    let differentPosition;
+let startTime;
+
+let differentPosition;
 
 
+/* -------------------------
+   START TEST
+------------------------- */
 
-    /* ===================================
-       START TEST
-    =================================== */
+function startTest() {
 
-    function startTest() {
+    let name =
+        document.getElementById(
+            "participantName"
+        ).value;
 
-        currentRound = 0;
+    let className =
+        document.getElementById(
+            "participantClass"
+        ).value;
 
-        correctAnswers = 0;
 
-        responseTimes = [];
+    if (
+        name.trim() === "" ||
+        className.trim() === ""
+    ) {
 
-        document
-            .getElementById("startScreen")
-            .classList.add("hidden");
+        alert(
+            "Please enter your name and class."
+        );
 
-        document
-            .getElementById("resultsScreen")
-            .classList.add("hidden");
-
-        document
-            .getElementById("testScreen")
-            .classList.remove("hidden");
-
-        nextRound();
+        return;
 
     }
 
 
+    question = 0;
 
-    /* ===================================
-       CREATE NEXT ROUND
-    =================================== */
+    correct = 0;
 
-    function nextRound() {
-
-        currentRound++;
-
-        document.getElementById("progress").innerText =
-            "Round " + currentRound + " of " + totalRounds;
+    responseTimes = [];
 
 
-        /*
-            Difficulty gets harder every round.
-
-            Larger difference = easier
-            Smaller difference = harder
-        */
-
-        let difference =
-            40 - ((currentRound - 1) * 2.5);
+    document
+        .getElementById("startScreen")
+        .classList.add("hidden");
 
 
-        if (difference < 5) {
-
-            difference = 5;
-
-        }
+    document
+        .getElementById("testScreen")
+        .classList.remove("hidden");
 
 
-        /* Generate the normal color */
+    nextQuestion();
 
-        let red = Math.floor(Math.random() * 150) + 50;
-
-        let green = Math.floor(Math.random() * 150) + 50;
-
-        let blue = Math.floor(Math.random() * 150) + 50;
+}
 
 
-        let normalColor = [
-            red,
-            green,
-            blue
-        ];
+/* -------------------------
+   NEXT QUESTION
+------------------------- */
+
+function nextQuestion() {
+
+    question++;
 
 
-        /* Create the slightly different color */
+    document.getElementById(
+        "progress"
+    ).innerText =
+        "Question " +
+        question +
+        " of " +
+        totalQuestions;
 
-        let differentColor = [
+
+    /*
+    Difficulty
+
+    The difference gets smaller
+    as the questions increase.
+    */
+
+
+    let difference =
+        60 -
+        ((question - 1) * 3);
+
+
+    if (difference < 3) {
+
+        difference = 3;
+
+    }
+
+
+    /*
+    Create base RGB
+    */
+
+
+    let red =
+        Math.floor(
+            Math.random() * 150
+        ) + 50;
+
+
+    let green =
+        Math.floor(
+            Math.random() * 150
+        ) + 50;
+
+
+    let blue =
+        Math.floor(
+            Math.random() * 150
+        ) + 50;
+
+
+    let normalColor = [
+        red,
+        green,
+        blue
+    ];
+
+
+    /*
+    Create different color
+    */
+
+
+    let differentColor = [
+
+        Math.min(
             red + difference,
-            green,
-            blue
-        ];
+            255
+        ),
+
+        Math.min(
+            green + difference,
+            255
+        ),
+
+        Math.min(
+            blue + difference,
+            255
+        )
+
+    ];
 
 
-        /*
-            Randomly choose which box
-            will contain the different color.
-        */
-
-        differentPosition =
-            Math.floor(Math.random() * 3);
+    /*
+    Randomly choose
+    different box
+    */
 
 
-        let colors = [
-            normalColor,
-            normalColor,
-            normalColor
-        ];
+    differentPosition =
+        Math.floor(
+            Math.random() * 3
+        );
 
 
-        colors[differentPosition] =
-            differentColor;
+    let colors = [
+
+        normalColor,
+        normalColor,
+        normalColor
+
+    ];
 
 
-        /* Put colors onto the buttons */
-
-        document.getElementById("color1").style.backgroundColor =
-            rgb(colors[0]);
-
-        document.getElementById("color2").style.backgroundColor =
-            rgb(colors[1]);
-
-        document.getElementById("color3").style.backgroundColor =
-            rgb(colors[2]);
+    colors[
+        differentPosition
+    ] = differentColor;
 
 
-        /* Start timer */
+    /*
+    Display colors
+    */
 
-        startTime = performance.now();
 
-        updateTimer();
+    document.getElementById(
+        "color1"
+    ).style.backgroundColor =
+        rgb(colors[0]);
+
+
+    document.getElementById(
+        "color2"
+    ).style.backgroundColor =
+        rgb(colors[1]);
+
+
+    document.getElementById(
+        "color3"
+    ).style.backgroundColor =
+        rgb(colors[2]);
+
+
+    /*
+    Start timer
+    */
+
+
+    startTime =
+        performance.now();
+
+
+    updateTimer();
+
+}
+
+
+/* -------------------------
+   RGB FUNCTION
+------------------------- */
+
+function rgb(color) {
+
+    return "rgb(" +
+
+        color[0] + "," +
+
+        color[1] + "," +
+
+        color[2] +
+
+        ")";
+
+}
+
+
+/* -------------------------
+   TIMER
+------------------------- */
+
+function updateTimer() {
+
+    let currentTime =
+        performance.now();
+
+
+    let time =
+        (currentTime - startTime)
+        / 1000;
+
+
+    document.getElementById(
+        "timer"
+    ).innerText =
+        time.toFixed(2);
+
+
+    if (
+        question <= totalQuestions
+    ) {
+
+        requestAnimationFrame(
+            updateTimer
+        );
+
+    }
+
+}
+
+
+/* -------------------------
+   COLOR CLICK
+------------------------- */
+
+function chooseColor(
+    selectedPosition
+) {
+
+    let endTime =
+        performance.now();
+
+
+    let responseTime =
+        (
+            endTime -
+            startTime
+        ) / 1000;
+
+
+    responseTimes.push(
+        responseTime
+    );
+
+
+    /*
+    Check answer
+    */
+
+
+    if (
+        selectedPosition ===
+        differentPosition
+    ) {
+
+        correct++;
 
     }
 
 
+    /*
+    Continue test
+    */
 
-    /* ===================================
-       RGB FUNCTION
-    =================================== */
 
-    function rgb(color) {
+    if (
+        question <
+        totalQuestions
+    ) {
 
-        return "rgb(" +
-            color[0] + "," +
-            color[1] + "," +
-            color[2] +
-            ")";
+        nextQuestion();
+
+    }
+
+    else {
+
+        showResults();
+
+    }
+
+}
+
+
+/* -------------------------
+   RESULTS
+------------------------- */
+
+function showResults() {
+
+    document
+        .getElementById(
+            "testScreen"
+        )
+        .classList.add("hidden");
+
+
+    document
+        .getElementById(
+            "resultsScreen"
+        )
+        .classList.remove("hidden");
+
+
+    /*
+    Accuracy
+    */
+
+
+    let accuracy =
+        (
+            correct /
+            totalQuestions
+        ) * 100;
+
+
+    /*
+    Average time
+    */
+
+
+    let totalTime = 0;
+
+
+    for (
+        let i = 0;
+        i < responseTimes.length;
+        i++
+    ) {
+
+        totalTime +=
+            responseTimes[i];
 
     }
 
 
-
-    /* ===================================
-       TIMER
-    =================================== */
-
-    function updateTimer() {
-
-        let currentTime = performance.now();
-
-        let elapsed =
-            (currentTime - startTime) / 1000;
+    let averageTime =
+        totalTime /
+        responseTimes.length;
 
 
-        document.getElementById("timer").innerText =
-            elapsed.toFixed(2);
+    document.getElementById(
+        "accuracy"
+    ).innerText =
+        accuracy.toFixed(0) + "%";
 
 
-        if (currentRound <= totalRounds) {
-
-            requestAnimationFrame(updateTimer);
-
-        }
-
-    }
+    document.getElementById(
+        "averageTime"
+    ).innerText =
+        averageTime.toFixed(2)
+        + " seconds";
 
 
+    document.getElementById(
+        "correctAnswers"
+    ).innerText =
+        correct +
+        " / " +
+        totalQuestions;
 
-    /* ===================================
-       WHEN PLAYER CHOOSES A COLOR
-    =================================== */
+}
 
-    function chooseColor(selectedPosition) {
-
-        let endTime = performance.now();
-
-
-        let responseTime =
-            (endTime - startTime) / 1000;
-
-
-        responseTimes.push(responseTime);
-
-
-        /* Check whether answer is correct */
-
-        if (selectedPosition === differentPosition) {
-
-            correctAnswers++;
-
-        }
-
-
-        /* Move to next round */
-
-        if (currentRound < totalRounds) {
-
-            nextRound();
-
-        }
-
-        else {
-
-            showResults();
-
-        }
-
-    }
-
-
-
-    /* ===================================
-       RESULTS
-    =================================== */
-
-    function showResults() {
-
-        document
-            .getElementById("testScreen")
-            .classList.add("hidden");
-
-
-        document
-            .getElementById("resultsScreen")
-            .classList.remove("hidden");
-
-
-        let accuracy =
-            (correctAnswers / totalRounds) * 100;
-
-
-        let totalTime = 0;
-
-
-        for (let i = 0; i < responseTimes.length; i++) {
-
-            totalTime += responseTimes[i];
-
-        }
-
-
-        let averageTime =
-            totalTime / responseTimes.length;
-
-
-        document.getElementById("accuracy").innerText =
-            accuracy.toFixed(0) + "%";
-
-
-        document.getElementById("averageTime").innerText =
-            averageTime.toFixed(2) + " seconds";
-
-
-        document.getElementById("correctAnswers").innerText =
-            correctAnswers + " / " + totalRounds;
-
-    }
 
 </script>
 
